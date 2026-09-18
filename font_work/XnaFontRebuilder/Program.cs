@@ -34,7 +34,10 @@ class Program
             {
                 if (args.Length < 4)
                 {
-                    Console.WriteLine("Usage: XnaFontRebuilder --build-cfg-auto <input.bin> <output.cfg> <fontPath>");
+                    Console.WriteLine("Usage: XnaFontRebuilder --build-cfg-auto <input.bin> <output.cfg> <fontPath> [--extra-ranges <hex-ranges>]");
+                    Console.WriteLine("  --extra-ranges: comma-separated hex unicode ranges to add on top of the ones");
+                    Console.WriteLine("                  found in <input.bin>, e.g. \"0600-06FF,FB50-FDFF,FE70-FEFF\"");
+                    Console.WriteLine("                  (useful for adding Persian/Arabic characters not present in the source binary)");
                     return 1;
                 }
 
@@ -42,7 +45,18 @@ class Program
                 string outputPath = args[2];
                 string fontPath = args[3];
 
-                BuildCfgAuto(inputPath, outputPath, fontPath);
+                // پشتیبانی از کاراکترهای اضافی (مثلاً فارسی/عربی) که در فایل FontInfo باینری وجود ندارند
+                string? extraRanges = null;
+                for (int i = 4; i < args.Length; i++)
+                {
+                    if ((args[i] == "--extra-ranges" || args[i] == "-er") && i + 1 < args.Length)
+                    {
+                        extraRanges = args[i + 1];
+                        i++;
+                    }
+                }
+
+                BuildCfgAuto(inputPath, outputPath, fontPath, extraRanges);
                 Console.WriteLine("Generated config: " + outputPath);
                 return 0;
             }
@@ -222,7 +236,7 @@ class Program
     #endregion
 
     #region 自动配置生成
-    static void BuildCfgAuto(string inputPath, string outputPath, string fontPath)
+    static void BuildCfgAuto(string inputPath, string outputPath, string fontPath, string? extraRangesSpec = null)
     {
         // 将所有路径解析为绝对路径，避免调用方工作目录不同导致找不到文件
         inputPath = Path.GetFullPath(inputPath);
@@ -255,7 +269,38 @@ class Program
             }
         }
 
+        // 追加额外的 Unicode 范围（例如波斯语/阿拉伯语），这些字符不在原始 FontInfo 二进制中
+        if (!string.IsNullOrWhiteSpace(extraRangesSpec))
+        {
+            int beforeCount = ids.Count;
+            foreach (var id in ParseUnicodeRanges(extraRangesSpec))
+            {
+                ids.Add(id);
+            }
+            Console.WriteLine($"Added extra unicode ranges: {extraRangesSpec} (+{ids.Count - beforeCount} code points before dedup)");
+        }
+
         GenerateCfg(ids, lineHeight, outputPath, fontPath);
+    }
+
+    /// <summary>
+    /// 将形如 "0600-06FF,FB50-FDFF,FE70-FEFF" 的十六进制 Unicode 范围字符串解析为码点列表。
+    /// 用逗号分隔多个范围；单个码点也可以只写起始值（不含连字符）。
+    /// </summary>
+    static IEnumerable<ushort> ParseUnicodeRanges(string rangesSpec)
+    {
+        foreach (var part in rangesSpec.Split(',', StringSplitOptions.RemoveEmptyEntries))
+        {
+            var bounds = part.Trim().Split('-');
+            int start = Convert.ToInt32(bounds[0].Trim(), 16);
+            int end = bounds.Length > 1 ? Convert.ToInt32(bounds[1].Trim(), 16) : start;
+
+            if (end < start)
+                throw new ArgumentException($"Invalid unicode range: {part} (end is before start)");
+
+            for (int c = start; c <= end; c++)
+                yield return (ushort)c;
+        }
     }
 
     /// <summary>
@@ -293,7 +338,10 @@ class Program
 
     static void GenerateCfg(List<ushort> ids, int fontSize, string outputPath, string fontPath)
     {
+        // 去重（原始 FontInfo 中的字符与 --extra-ranges 追加的字符可能有重叠）
+        ids = ids.Distinct().ToList();
         ids.Sort();
+
         var ranges = new List<string>();
         int start = ids[0];
         int end = ids[0];
@@ -409,7 +457,8 @@ class Program
         Console.WriteLine("Usage:");
         Console.WriteLine("  XnaFontRebuilder --convert <input.fnt> [output.txt] [options]");
         Console.WriteLine("    Options: --line-height <value>, --ascii-extra-spacing <value>, --character-spacing-compensation <value>");
-        Console.WriteLine("  XnaFontRebuilder --build-cfg-auto <input.bin> <output.cfg> <fontPath>");
+        Console.WriteLine("  XnaFontRebuilder --build-cfg-auto <input.bin> <output.cfg> <fontPath> [--extra-ranges <hex-ranges>]");
+        Console.WriteLine("    --extra-ranges: comma-separated hex unicode ranges to add, e.g. \"0600-06FF,FB50-FDFF,FE70-FEFF\"");
     }
     #endregion
 }
