@@ -12,7 +12,8 @@
       "fontFile": "Item_Stack.fnt",
       "txtFile": "Item_Stack.txt",
       "description": "物品堆叠数字字体",
-      "charInfoFile": "./FontInfo/Item_Stack.txt"
+      "charInfoFile": "./FontInfo/Item_Stack.txt",
+      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
     },
     "Combat_Crit": {
       "configFile": "./Combat_Crit.bmfc",
@@ -20,7 +21,8 @@
       "fontFile": "Combat_Crit.fnt",
       "txtFile": "Combat_Crit.txt",
       "description": "战斗暴击数字字体",
-      "charInfoFile": "./FontInfo/Combat_Crit.txt"
+      "charInfoFile": "./FontInfo/Combat_Crit.txt",
+      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
     },
     "Combat_Text": {
       "configFile": "./Combat_Text.bmfc",
@@ -28,7 +30,8 @@
       "fontFile": "Combat_Text.fnt",
       "txtFile": "Combat_Text.txt",
       "description": "战斗文字字体",
-      "charInfoFile": "./FontInfo/Combat_Text.txt"
+      "charInfoFile": "./FontInfo/Combat_Text.txt",
+      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
     },
     "Death_Text": {
       "configFile": "./Death_Text.bmfc",
@@ -36,7 +39,8 @@
       "fontFile": "Death_Text.fnt",
       "txtFile": "Death_Text.txt",
       "description": "死亡文字字体",
-      "charInfoFile": "./FontInfo/Death_Text.txt"
+      "charInfoFile": "./FontInfo/Death_Text.txt",
+      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
     },
     "Mouse_Text": {
       "configFile": "./Mouse_Text.bmfc",
@@ -44,7 +48,8 @@
       "fontFile": "Mouse_Text.fnt",
       "txtFile": "Mouse_Text.txt",
       "description": "鼠标提示文字字体",
-      "charInfoFile": "./FontInfo/Mouse_Text.txt"
+      "charInfoFile": "./FontInfo/Mouse_Text.txt",
+      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
     }
   },
   "conversion": {
