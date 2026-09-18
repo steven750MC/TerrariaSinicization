@@ -13,7 +13,7 @@
       "txtFile": "Item_Stack.txt",
       "description": "物品堆叠数字字体",
       "charInfoFile": "./FontInfo/Item_Stack.txt",
-      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
+      "extraUnicodeRanges": "0020-005D,005F-007E,00AB,00B7,00BB,00D7,0434,0436,0438,043C,0440,0442,0445,060C,061B,061F,0662,066A,06F0-06F9,200C,2014,2026,5409,83AB,897F,FB56-FB59,FB7A-FB7D,FB8A-FB8B,FB8E-FB95,FBA7,FBFC-FBFF,FE80-FE81,FE83-FE86,FE8B-FE92,FE95-FED8,FEDD-FEEE,FEF4,FEF7-FEF8,FEFB-FEFC"
     },
     "Combat_Crit": {
       "configFile": "./Combat_Crit.bmfc",
@@ -22,7 +22,7 @@
       "txtFile": "Combat_Crit.txt",
       "description": "战斗暴击数字字体",
       "charInfoFile": "./FontInfo/Combat_Crit.txt",
-      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
+      "extraUnicodeRanges": "0020-005D,005F-007E,00AB,00B7,00BB,00D7,0434,0436,0438,043C,0440,0442,0445,060C,061B,061F,0662,066A,06F0-06F9,200C,2014,2026,5409,83AB,897F,FB56-FB59,FB7A-FB7D,FB8A-FB8B,FB8E-FB95,FBA7,FBFC-FBFF,FE80-FE81,FE83-FE86,FE8B-FE92,FE95-FED8,FEDD-FEEE,FEF4,FEF7-FEF8,FEFB-FEFC"
     },
     "Combat_Text": {
       "configFile": "./Combat_Text.bmfc",
@@ -31,7 +31,7 @@
       "txtFile": "Combat_Text.txt",
       "description": "战斗文字字体",
       "charInfoFile": "./FontInfo/Combat_Text.txt",
-      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
+      "extraUnicodeRanges": "0020-005D,005F-007E,00AB,00B7,00BB,00D7,0434,0436,0438,043C,0440,0442,0445,060C,061B,061F,0662,066A,06F0-06F9,200C,2014,2026,5409,83AB,897F,FB56-FB59,FB7A-FB7D,FB8A-FB8B,FB8E-FB95,FBA7,FBFC-FBFF,FE80-FE81,FE83-FE86,FE8B-FE92,FE95-FED8,FEDD-FEEE,FEF4,FEF7-FEF8,FEFB-FEFC"
     },
     "Death_Text": {
       "configFile": "./Death_Text.bmfc",
@@ -40,7 +40,7 @@
       "txtFile": "Death_Text.txt",
       "description": "死亡文字字体",
       "charInfoFile": "./FontInfo/Death_Text.txt",
-      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
+      "extraUnicodeRanges": "0020-005D,005F-007E,00AB,00B7,00BB,00D7,0434,0436,0438,043C,0440,0442,0445,060C,061B,061F,0662,066A,06F0-06F9,200C,2014,2026,5409,83AB,897F,FB56-FB59,FB7A-FB7D,FB8A-FB8B,FB8E-FB95,FBA7,FBFC-FBFF,FE80-FE81,FE83-FE86,FE8B-FE92,FE95-FED8,FEDD-FEEE,FEF4,FEF7-FEF8,FEFB-FEFC"
     },
     "Mouse_Text": {
       "configFile": "./Mouse_Text.bmfc",
@@ -49,7 +49,7 @@
       "txtFile": "Mouse_Text.txt",
       "description": "鼠标提示文字字体",
       "charInfoFile": "./FontInfo/Mouse_Text.txt",
-      "extraUnicodeRanges": "0600-06FF,FB50-FDFF,FE70-FEFF"
+      "extraUnicodeRanges": "0020-005D,005F-007E,00AB,00B7,00BB,00D7,0434,0436,0438,043C,0440,0442,0445,060C,061B,061F,0662,066A,06F0-06F9,200C,2014,2026,5409,83AB,897F,FB56-FB59,FB7A-FB7D,FB8A-FB8B,FB8E-FB95,FBA7,FBFC-FBFF,FE80-FE81,FE83-FE86,FE8B-FE92,FE95-FED8,FEDD-FEEE,FEF4,FEF7-FEF8,FEFB-FEFC"
     }
   },
   "conversion": {
