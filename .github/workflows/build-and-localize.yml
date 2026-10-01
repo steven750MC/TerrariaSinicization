@@ -66,7 +66,28 @@ jobs:
         Get-ChildItem -Path font_work -Recurse -Filter "*.txt" -ErrorAction SilentlyContinue |
           Where-Object { $_.FullName -notmatch '\\FontInfo\\' } |
           ForEach-Object { Write-Host ("  {0} ({1:N0} bytes)" -f $_.FullName, $_.Length) }
-    
+    - name: Stage generated fonts
+      shell: pwsh
+      run: |
+        $src = Join-Path $env:GITHUB_WORKSPACE "font_work"
+        $dst = Join-Path $env:GITHUB_WORKSPACE "generated_fonts"
+        New-Item -ItemType Directory -Force -Path $dst | Out-Null
+        Get-ChildItem -Path $src -Recurse -Include *.png,*.txt -File |
+          Where-Object { $_.FullName -notmatch '\\FontInfo\\' } |
+          ForEach-Object {
+            $rel = $_.FullName.Substring($src.Length).TrimStart('\')
+            $target = Join-Path $dst $rel
+            New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null
+            Copy-Item $_.FullName $target
+          }
+        Get-ChildItem $dst -Recurse -File | ForEach-Object { Write-Host "  staged: $($_.FullName)" }
+
+    - name: Upload generated fonts
+      uses: actions/upload-artifact@v7
+      with:
+        name: generated-fonts
+        path: generated_fonts
+        if-no-files-found: error
     - name: Build UnpackTerrariaTextAsset
       run: |
         cd UnpackTerrariaTextAsset
